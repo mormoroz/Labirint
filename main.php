@@ -19,7 +19,13 @@ function printShortestPath($from_name, $to_name, $routes): void
     foreach ($routes as $route) {
         $from = $route['from'];
         $to = $route['to'];
-        $price = $route['price'];
+        if ($route['price'] == 0)
+        {
+            $price = count($routes) * 10;
+        }
+        else {
+            $price = $route['price'];
+        }
         if (! array_key_exists($from, $graph->getNodes())) {
             $from_node = new Node($from);
             $graph->add($from_node);
@@ -47,7 +53,7 @@ function printShortestPath($from_name, $to_name, $routes): void
 }
 
 $routes = array();
-$routes[] = array('from'=>'a', 'to'=>'b', 'price'=>1);
+$routes[] = array('from'=>'a', 'to'=>'b', 'price'=>0);
 $routes[] = array('from'=>'c', 'to'=>'d', 'price'=>3);
 $routes[] = array('from'=>'b', 'to'=>'c', 'price'=>2);
 $routes[] = array('from'=>'a', 'to'=>'d', 'price'=>9);

@@ -137,7 +137,6 @@ class Dijkstra {
         $sorted = array_flip($connections);
         krsort($sorted);
         foreach ( $connections as $id => $distance ) {
-            if ($distance <> 0) {
             $v = $this->getGraph()->getNode($id);
                 $v->setPotential($node->getPotential() + $distance, $node);
                 foreach ($this->getPaths() as $path) {
@@ -146,7 +145,6 @@ class Dijkstra {
                         $this->paths[] = array_merge($path, array($v));
                     }
                 }
-            }
         }
         $node->markPassed();
         // Get loop through the current node's nearest connections
