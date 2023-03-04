@@ -19,13 +19,7 @@ function printShortestPath($from_name, $to_name, $routes): void
     foreach ($routes as $route) {
         $from = $route['from'];
         $to = $route['to'];
-        if ($route['price'] == 0)
-        {
-            $price = count($routes) * 10;
-        }
-        else {
-            $price = $route['price'];
-        }
+        $price = $route['price'];
         if (! array_key_exists($from, $graph->getNodes())) {
             $from_node = new Node($from);
             $graph->add($from_node);
@@ -75,7 +69,7 @@ for ($j = 0; $j < $m; $j++){
         echo "number of moves from A[", $i,"]","[", $j,"] (id = ",$id, ") to ", "A[", $i+1,"]","[", $j,"] (id = ",$id+$m,"):".PHP_EOL;
         $price = readline();
         $routes[] = array('from'=>$id, 'to'=>($id+$m), 'price'=>$price);
-        $routes[] = array('from'=>($id+$m), 'to'=>$id, 'price'=>$price);
+        //$routes[] = array('from'=>($id+$m), 'to'=>$id, 'price'=>$price);
         $id = $id + $m;
     }
     $id = $j+2;
@@ -86,12 +80,5 @@ $start = readline();
 
 echo "Input id of end point: ";
 $end = readline();
-
-//print_r($routes);
-//$routes[] = array('from'=>'a', 'to'=>'b', 'price'=>0);
-//$routes[] = array('from'=>'c', 'to'=>'d', 'price'=>3);
-//$routes[] = array('from'=>'b', 'to'=>'c', 'price'=>2);
-//$routes[] = array('from'=>'a', 'to'=>'d', 'price'=>9);
-//$routes[] = array('from'=>'b', 'to'=>'d', 'price'=>3);
 
 printShortestPath($start, $end, $routes);

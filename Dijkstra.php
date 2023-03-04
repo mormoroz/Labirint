@@ -134,17 +134,18 @@ class Dijkstra {
     protected function calculatePotentials(Node $node): void
     {
         $connections = $node->getConnections();
+        $connections = array_diff($connections, array(NULL));
         $sorted = array_flip($connections);
         krsort($sorted);
         foreach ( $connections as $id => $distance ) {
             $v = $this->getGraph()->getNode($id);
-                $v->setPotential($node->getPotential() + $distance, $node);
-                foreach ($this->getPaths() as $path) {
-                    $count = count($path);
-                    if ($path[$count - 1]->getId() === $node->getId()) {
-                        $this->paths[] = array_merge($path, array($v));
-                    }
+            $v->setPotential($node->getPotential() + $distance, $node);
+            foreach ($this->getPaths() as $path) {
+                $count = count($path);
+                if ($path[$count - 1]->getId() === $node->getId()) {
+                    $this->paths[] = array_merge($path, array($v));
                 }
+            }
         }
         $node->markPassed();
         // Get loop through the current node's nearest connections

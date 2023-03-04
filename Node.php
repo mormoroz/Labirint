@@ -27,7 +27,12 @@ class Node implements NodeInterface {
      * @param integer $distance
      */
     public function connect(NodeInterface $node, int $distance = 0) {
-        $this->connections[$node->getId()] = $distance;
+        if ($distance == 0) {
+            $this->connections[$node->getId()] = NULL;
+        }
+        else {
+            $this->connections[$node->getId()] = $distance;
+        }
     }
 
     /**
